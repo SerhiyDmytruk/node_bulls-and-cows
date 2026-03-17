@@ -16,10 +16,12 @@ const rl = readline.createInterface({
 
 function play() {
   rl.question('Guess the number:  ', (number) => {
-    if (!checkIsValidUserInput(number)) {
+    if (checkIsValidUserInput(number)) {
       console.log('You entered an invalid value');
 
       play();
+
+      return;
     }
 
     const result = getBullsAndCows(number, randomNumber);
@@ -27,6 +29,8 @@ function play() {
     if (result.bulls === 4) {
       console.log('You won!');
       rl.close();
+
+      return;
     }
 
     console.log(`Bulls: ${result.bulls}, Cows: ${result.cows}`);

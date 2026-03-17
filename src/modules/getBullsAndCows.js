@@ -13,8 +13,6 @@
  * Example: { bulls: 1, cows: 2 }
  */
 function getBullsAndCows(userInput, numberToGuess) {
-  /* Write your code here */
-
   const obj = {
     bulls: 0,
     cows: 0,
