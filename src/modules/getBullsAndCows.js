@@ -26,10 +26,8 @@ function getBullsAndCows(userInput, numberToGuess) {
   for (const n in randomN) {
     if (randomN[n] === userN[n]) {
       obj.bulls++;
-    } else if (randomN[n] !== userN[n]) {
-      if (randomN.includes(userN[n])) {
-        obj.cows++;
-      }
+    } else if (randomN.includes(userN[n])) {
+      obj.cows++;
     }
   }
 

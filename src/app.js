@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 'use strict';
-import readline from 'node:readline';
 
-const { getBullsAndCowsec } = require('./modules/getBullsAndCows.js');
-const { generateRandomNumber } = require('./modules/generateRandomNumber.js');
-const { checkIsValidUserInput } = require('./modules/checkIsValidUserInput.js');
+const readline = require('node:readline');
+const { getBullsAndCows } = require('./modules/getBullsAndCows');
+const { generateRandomNumber } = require('./modules/generateRandomNumber');
+const { checkIsValidUserInput } = require('./modules/checkIsValidUserInput');
 
 // Write your code here
 const randomNumber = generateRandomNumber();
@@ -13,10 +14,24 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question('What is our number? ', (number) => {
-  if (checkIsValidUserInput(number)) {
-    getBullsAndCowsec(number, randomNumber);
-  }
+function play() {
+  rl.question('Guess the number:  ', (number) => {
+    if (!checkIsValidUserInput(number)) {
+      console.log('You entered an invalid value');
 
-  rl.close();
-});
+      play();
+    }
+
+    const result = getBullsAndCows(number, randomNumber);
+
+    if (result.bulls === 4) {
+      console.log('You won!');
+      rl.close();
+    }
+
+    console.log(`Bulls: ${result.bulls}, Cows: ${result.cows}`);
+    play();
+  });
+}
+
+play();
